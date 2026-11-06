@@ -6,9 +6,11 @@ A small Spring Boot REST backend for the same event-management domain as [PADO E
 
 ## Stack and prerequisites
 
-JDK 21, Spring Boot 3.5.16, Maven 3.9+, Spring Web, Bean Validation, Spring Data JPA, PostgreSQL and Flyway. JUnit 5 tests use both isolated logic checks and a real HTTP server/PostgreSQL integration profile. Tested locally with Temurin 21.0.13, Maven 3.10.0 and PostgreSQL 17.11 on Windows.
+JDK 21, Spring Boot 4.0.9, Maven 3.9+, Spring MVC, Bean Validation, Spring Data JPA, PostgreSQL and Flyway. JUnit tests use both isolated logic checks and a real HTTP server/PostgreSQL integration profile. Tested locally with Temurin 21.0.13, Maven 3.10.0 and PostgreSQL 17.11 on Windows.
 
-Java 21 is an LTS learning baseline. Spring Boot 3.5.16 is a verified stable 3.x release compatible with Java 21, selected to keep familiar Spring 6/JPA APIs rather than add a major-version migration to this exercise. It is not claimed to be the newest Spring Boot major. Its parent POM was successfully resolved from Maven Central. See [official requirements](https://docs.spring.io/spring-boot/3.5/system-requirements.html). Maven wrapper is omitted in favor of the explicit prerequisites; verify `java -version` and `mvn -version` first.
+Java 21 remains the LTS learning baseline. The runtime moved from Spring Boot 3.5.16 to 4.0.9 after an OSV audit identified advisories in its managed dependencies. The new BOM supplies Spring Framework 7.0.10, Jackson 3.1.7, Tomcat 11.0.27, PostgreSQL JDBC 42.7.14 and Log4j API 2.25.5. MVC and Flyway use the modular Boot 4 starters. The existing HTTP/PostgreSQL tests verify the REST contract after this upgrade; Jackson imports in integration tests now use the version 3 package. Maven wrapper is omitted in favor of explicit prerequisites; verify `java -version` and `mvn -version` first.
+
+CI resolves a machine-readable Maven tree and queries OSV for all resolved compile/runtime/test dependencies. It fails on an empty inventory, an unavailable audit service after retries, or reported advisories. A clean result describes the database at scan time, rather than guaranteeing the absence of vulnerabilities.
 
 ## Run with an existing PostgreSQL database
 

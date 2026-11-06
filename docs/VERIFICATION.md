@@ -1,5 +1,11 @@
 # Actual verification on 6 November 2026
 
+## Runtime security update
+
+Spring Boot 4.0.9 passed `mvn -Pintegration clean verify`: six unit tests and nine real HTTP/PostgreSQL integration tests, without skipped tests. The package was rebuilt with the new runtime. The regenerated dependency tree and license metadata contain 111 dependencies; the OSV query returned no findings for those exact coordinates. CI repeats both the database tests and the OSV check.
+
+Earlier packaged-JAR and browser observations below describe the original learning baseline. The unchanged REST operations were rechecked by the HTTP integration tests after the runtime upgrade.
+
 Environment: Windows, Eclipse Temurin 21.0.13, Maven 3.10.0, PostgreSQL 17.11 on loopback. Separate disposable databases were used for integration and manual demo execution. No system Java version or existing user database was changed.
 
 | Command or check | Actual result |

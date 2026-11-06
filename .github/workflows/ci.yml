@@ -5,6 +5,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     services:
       postgres:
         image: postgres:17-alpine
@@ -28,3 +29,7 @@ jobs:
           java-version: '21'
           cache: maven
       - run: mvn --batch-mode --no-transfer-progress -Pintegration verify
+      - name: Resolve dependency inventory
+        run: mvn --batch-mode --no-transfer-progress dependency:tree -DoutputType=json -DoutputFile=target/dependency-tree.json
+      - name: Check Maven dependencies against OSV
+        run: python3 scripts/audit_dependencies.py target/dependency-tree.json
