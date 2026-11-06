@@ -12,7 +12,7 @@ Environment: Windows, Eclipse Temurin 21.0.13, Maven 3.10.0, PostgreSQL 17.11 on
 | Error routing | Unknown route 404, unsupported method 405, malformed query/body 400 verified over HTTP |
 | Dependency tree and POM license metadata | Generated successfully; 94 direct/transitive runtime/test dependencies inventoried |
 | Docker image and Compose | NOT RUN: Docker is not installed in this environment |
-| Hosted GitHub Actions | NOT RUN: prepared workflow; repository not remotely published |
+| Hosted GitHub Actions | Separate execution; inspect the commit-specific [workflow runs](https://github.com/PADOALEX/PADO-Java-EventFlow/actions/workflows/ci.yml) for current hosted status |
 
 The first integration attempt failed because the new test database had not yet been created. The setup was corrected, and the final full profile passed. A subsequent protocol-error test caught the need to preserve Spring's HTTP error status in the generic exception handler; the final run includes that correction. None of those failed attempts are represented as passing runs.
 

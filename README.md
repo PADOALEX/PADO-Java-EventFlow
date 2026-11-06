@@ -1,5 +1,7 @@
 # PADO Java EventFlow
 
+[![Build and PostgreSQL integration tests](https://github.com/PADOALEX/PADO-Java-EventFlow/actions/workflows/ci.yml/badge.svg)](https://github.com/PADOALEX/PADO-Java-EventFlow/actions/workflows/ci.yml)
+
 A small Spring Boot REST backend for the same event-management domain as [PADO EventFlow](https://github.com/PADOALEX/PADO-EventFlow). It connects explicit HTTP DTOs to PostgreSQL through a service and Spring Data JPA, applies a Flyway migration, and supports the existing React client's event operations. The original .NET backend is unchanged.
 
 ## Stack and prerequisites
@@ -72,7 +74,7 @@ $env:EVENTFLOW_TEST_DB_PASSWORD = '<test-only-database-password>'
 mvn --batch-mode --no-transfer-progress -Pintegration verify
 ```
 
-The integration profile deletes events **only in that named test database**, performs real HTTP CRUD/search/filter/pagination/validation checks, and tests a direct-write constraint. It fails explicitly without the required configuration; it never substitutes H2 or silently skips tests. CI provisions PostgreSQL 17 for the same profile. Prepared CI is not a completed remote run: [actual verification](docs/VERIFICATION.md).
+The integration profile deletes events **only in that named test database**, performs real HTTP CRUD/search/filter/pagination/validation checks, and tests a direct-write constraint. It fails explicitly without the required configuration; it never substitutes H2 or silently skips tests. [CI](https://github.com/PADOALEX/PADO-Java-EventFlow/actions/workflows/ci.yml) provisions PostgreSQL 17 for the same profile on pushes and pull requests. [Local verification](docs/VERIFICATION.md) and hosted run results are separate evidence.
 
 ## Architecture and limits
 
